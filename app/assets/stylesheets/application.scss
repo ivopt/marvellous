@@ -1,0 +1,29 @@
+@import 'variables';
+@import 'comics';
+@import url(https://fonts.googleapis.com/css?family=Marvel:700);
+@import url(https://fonts.googleapis.com/css?family=Bangers);
+
+html, body {
+  margin: 0;
+  padding: 0;
+  color: $clr-text;
+  background-color: $clr-background;
+  font-family: 'Marvel', sans-serif;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  opacity: 0.9;
+  width: 100%;
+  height: $size-header-height;
+  background-color: $clr-marvel-red;
+  text-align: center;
+}
+
+.content {
+  margin: auto;
+  margin-top: $size-header-height + 10px;
+  max-width: 1200px;
+}

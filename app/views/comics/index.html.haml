@@ -1,8 +1,15 @@
-- comics.each do |comic|
-  .comic
-    .title= comic.title
-    .date= comic.date
-    %img.thumbnail{src: comic.thumbnail_path}
+.comics
+  - comics.each do |comic|
+    .comic
+      .thumbnail
+        %img{src: comic.thumbnail_path}
+      .overlay
+        .background
+        .details
+          .title= comic.title
+          %span.number= "##{comic.issue_number}"
+          %span.date= comic.date.year
 
-= previous_page_link(page)
-= next_page_link(page)
+.paginator
+  .prev= previous_page_link(page)
+  .next= next_page_link(page)

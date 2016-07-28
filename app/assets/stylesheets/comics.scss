@@ -1,0 +1,100 @@
+// Place all the styles related to the Comics controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'variables';
+@import 'mixins';
+
+$size-comic-height: 330px;
+$size-comic-width: 220px;
+$size-comic-margin: 10px;
+
+.comics {
+  @include clearfix;
+
+  margin-bottom: 10px;
+
+  .comic {
+    position: relative;
+    margin: $size-comic-margin;
+    float: left;
+    width: $size-comic-width;
+    height: $size-comic-height;
+
+    .thumbnail img{
+      width: $size-comic-width;
+      height: $size-comic-height;
+      box-shadow: 0px 0px $size-comic-margin 0px black;
+    }
+
+    .overlay {
+      vertical-align: bottom;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
+      width: $size-comic-width - $size-comic-margin;
+      height: $size-comic-height - $size-comic-margin;
+      border-width: $size-comic-margin / 2;
+      border-style: solid;
+      border-color: transparent;
+
+      &:hover {
+        border-color: $clr-marvel-red;
+
+        .background {
+          background-color: black;
+        }
+        .details { display: block; }
+      }
+
+      .background {
+        opacity: 0.7;
+        background-color: transparent;
+        width: 100%;
+        height: 100%;
+      }
+
+      .details {
+        text-transform: uppercase;
+        font-weight: bolder;
+        position: absolute;
+        bottom: 0;
+        display: none;
+
+        * {
+          margin-bottom: 5px;
+          padding: 5px;
+        }
+
+        .number, .date { float: left; }
+        .number { background-color: $clr-marvel-red; }
+        .date { background-color: $clr-background; }
+      }
+
+    }
+
+    &.favourite {
+      .overlay {
+        border-color: $clr-marvel-red;
+      }
+    }
+  }
+}
+
+.paginator {
+  @include clearfix;
+  margin: 10px;
+
+  * {
+    background-color: $clr-text;
+    color: $clr-marvel-red;
+    text-transform: uppercase;
+    font-weight: bolder;
+    padding: 0 5px;
+  }
+
+  a { text-decoration: none; }
+  .prev { float: left; }
+  .next { float: right; }
+}

@@ -15,9 +15,9 @@ describe 'Listing comics', type: :feature do
     end
 
     it 'displiays comics ordered from youngest to oldest' do
-      dates = page.all('.date').map(&:text)
-      dates.each_cons(2) do |date1, date2|
-        expect(date1.to_date).to be >= date2.to_date
+      years = page.all('.year').map(&:text)
+      years.each_cons(2) do |year1, year2|
+        expect(year1.to_i).to be >= year2.to_i
       end
     end
   end
