@@ -14,8 +14,11 @@ describe 'Listing comics', type: :feature do
       expect(page).to have_content('Next Page')
     end
 
-    xit 'displays comics ordered from youngest to oldest' do
-      # TODO: find a way to check order
+    it 'displiays comics ordered from youngest to oldest' do
+      dates = page.all('.date').map(&:text)
+      dates.each_cons(2) do |date1, date2|
+        expect(date1.to_date).to be >= date2.to_date
+      end
     end
   end
 
