@@ -6,7 +6,7 @@ class ComicsRepository
     @marvel_client = marvel_client
   end
 
-  def comics(page: nil, per: nil)
+  def comics(page: nil, per: nil, characters: nil)
     opts = {
       # default order: from recent to old (by publishing date)
       orderBy: '-onsaleDate'
@@ -15,6 +15,10 @@ class ComicsRepository
     if page && per
       opts[:limit]  = per
       opts[:offset] = (page - 1) * per
+    end
+
+    if characters
+      opts[:characters] = characters
     end
 
     # if only we had the |> operator...

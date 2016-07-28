@@ -32,8 +32,19 @@ describe ComicsRepository do
     it 'translates `page` and `per` arguments into marvel API arguments' do
       args = {page: 2, per: 10}
 
-      expect(marvel_client).to receive(:comics).with(hash_including(limit: 10, offset: 10))
+      expect(marvel_client).to(
+        receive(:comics).with hash_including(limit: 10, offset: 10)
+      )
       subject.comics(args)
+    end
+
+    it 'passes the characters argument down into the marvel API' do
+      characters = [1,2,3]
+
+      expect(marvel_client).to(
+        receive(:comics).with hash_including(characters: characters)
+      )
+      subject.comics(characters: characters)
     end
 
     it 'returns a collection of the same length as the marvel_client result list' do
