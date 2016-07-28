@@ -7,8 +7,8 @@ class ListComics
 
   attr_reader :comics_repository
 
-  def initialize(comics_repo = ComicsRepository.new)
-    @comics_repository = comics_repo
+  def initialize(comics_repository: ComicsRepository.new)
+    @comics_repository = comics_repository
   end
 
   def call(page: 1, success: ->{}, failure: ->{})

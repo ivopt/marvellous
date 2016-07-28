@@ -5,7 +5,7 @@ describe ListComics do
   let(:comic1) { build(:comic) }
   let(:comic2) { build(:comic) }
   let(:comics_repo) { double('ComicsRepository', comics: [comic1, comic2]) }
-  subject { described_class.new(comics_repo) }
+  subject { described_class.new(comics_repository: comics_repo) }
 
   describe '.call' do
     it 'calls to the repository#comics method' do
