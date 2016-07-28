@@ -7,7 +7,8 @@ class ComicsController < ApplicationController
     list_command.call(
       page: page,
       success: ->(comics) {
-        render(:index, locals: { comics: comics, page: page })
+        decorated_comics = ComicDecorator.wrap(comics)
+        render(:index, locals: { comics: decorated_comics, page: page })
       },
       failure: ->{
         render template: 'errors/unknown', status: 500
