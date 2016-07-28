@@ -6,6 +6,7 @@ class ComicsController < ApplicationController
 
     list_command.call(
       page: page,
+      search_form: @search_form,
       success: ->(comics) {
         decorated_comics = ComicDecorator.wrap(comics)
         render(:index, locals: { comics: decorated_comics, page: page })

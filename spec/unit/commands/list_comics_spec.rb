@@ -5,7 +5,12 @@ describe ListComics do
   let(:comic1) { build(:comic) }
   let(:comic2) { build(:comic) }
   let(:comics_repo) { double('ComicsRepository', comics: [comic1, comic2]) }
-  subject { described_class.new(comics_repository: comics_repo) }
+  let(:chars_repo) { double('CharactersRepository') }
+
+  subject {
+    described_class.new(comics_repository: comics_repo,
+                        characters_repository: chars_repo)
+  }
 
   describe '.call' do
     it 'calls to the repository#comics method' do
@@ -26,6 +31,35 @@ describe ListComics do
         receive(:comics).with(hash_including(per: described_class::PER_PAGE))
       )
       subject.call
+    end
+
+    context 'when passed a search form with a character name' do
+      let(:character_name) { 'spider' }
+      let(:character1) { build(:character, name: "#{character_name} 1") }
+      let(:character2) { build(:character, name: "#{character_name} 2") }
+      let(:chars_repo) { double('CharactersRepository', characters: [character1, character2]) }
+
+      it 'passes a list of character ids when calling to the comics repository' do
+        search_form = OpenStruct.new(character: character_name)
+        expect(comics_repo).to(
+          receive(:comics).with hash_including(characters: chars_repo.characters.map(&:id))
+        )
+        subject.call(search_form: search_form)
+      end
+
+      shared_examples "ignores the search form when" do |reason, example|
+        it "character #{reason}" do
+          search_form = OpenStruct.new(character: example)
+          expect(comics_repo).not_to(
+            receive(:comics).with hash_including(characters: chars_repo.characters.map(&:id))
+          )
+          subject.call(search_form: search_form)
+        end
+      end
+
+      it_behaves_like 'ignores the search form when', 'is nil', nil
+      it_behaves_like 'ignores the search form when', 'is empty', ''
+      it_behaves_like 'ignores the search form when', 'is only whitespace', '   '
     end
 
     context 'on successful call to repository' do

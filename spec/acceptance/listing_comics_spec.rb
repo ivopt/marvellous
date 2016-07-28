@@ -47,4 +47,17 @@ describe 'Listing comics', :vcr, type: :feature do
     end
   end
 
+  describe 'search by character' do
+    # This tests are kind of flaky as they depend on this character
+    # that only has 3 comics...
+    before { visit '/?search_form[character]=Lorna' }
+
+    it 'displays only the comics for the given character' do
+      expect(page).to have_css('.comic', count: 3)
+    end
+
+    it 'pagination links preserve the search form' do
+      expect(page).to have_link('Next Page', :href => /Lorna/)
+    end
+  end
 end

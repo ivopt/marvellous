@@ -9,6 +9,6 @@
   %body
     %header
       = image_tag('marvel_logo')
-      %div [search form placeholder]
+      = render('shared/search_form', search_form: @search_form)
     .content
       = yield
