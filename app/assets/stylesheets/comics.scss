@@ -57,7 +57,6 @@ $size-comic-margin: 10px;
 
       .details {
         text-transform: uppercase;
-        font-weight: bolder;
         position: absolute;
         bottom: 0;
         display: none;
@@ -91,7 +90,7 @@ $size-comic-margin: 10px;
     color: $clr-marvel-red;
     text-transform: uppercase;
     font-weight: bolder;
-    padding: 0 5px;
+    padding: 5px;
   }
 
   a { text-decoration: none; }
