@@ -29,10 +29,11 @@ class ComicsRepository
 
   def map_to_model(comic_hash)
     Comic.new(
-      id: comic_hash[:id],
+      id: comic_hash[:id].to_i,
       title: comic_hash[:title],
       thumbnail_path: "#{comic_hash[:thumbnail][:path]}.#{comic_hash[:thumbnail][:extension]}",
-      date: comic_hash[:dates].find{|d| d[:type] == 'onsaleDate'}[:date]
+      date: comic_hash[:dates].find{|d| d[:type] == 'onsaleDate'}[:date],
+      issue_number: comic_hash[:issueNumber].to_i
     )
   end
 end

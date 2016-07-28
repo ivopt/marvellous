@@ -7,6 +7,7 @@ describe ComicsRepository do
     {
       id: id,
       title: "Comic #{id}",
+      issueNumber: id*rand(10),
       thumbnail: {path: "http://example.com/comic_#{id}", extension: 'jpg'},
       dates: [
         {type: 'onsaleDate', date: "2016-01-0#{id}T00:00:00"}
@@ -48,6 +49,7 @@ describe ComicsRepository do
       expect(comics.first.title).to eq comic1[:title]
       expect(comics.first.thumbnail_path).to eq "#{comic1[:thumbnail][:path]}.#{comic1[:thumbnail][:extension]}"
       expect(comics.first.date).to eq comic1[:dates][0][:date].to_date
+      expect(comics.first.issue_number).to eq comic1[:issueNumber]
     end
   end
 
