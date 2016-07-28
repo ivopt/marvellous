@@ -1,13 +1,26 @@
 class ComicsController < ApplicationController
+  before_action :load_list_comics_command
 
   def index
-    render(:index, locals: {
-      comics: [
-        Comic.new(id: 42882, title: 'Lorna the Jungle Girl (1954) #6', thumbnail_path: 'http://i.annihil.us/u/prod/marvel/i/mg/9/40/50b4fc783d30f.jpg'),
-        Comic.new(id: 41530, title: 'Ant-Man: So (Trade Paperback)', thumbnail_path: 'http://i.annihil.us/u/prod/marvel/i/mg/c/30/4fe8cb51f32e0.jpg'),
-        Comic.new(id: 43092, title: 'Brilliant (2011) #7', thumbnail_path: 'http://i.annihil.us/u/prod/marvel/i/mg/b/80/4fb2a4aa018c6.jpg'),
-      ]
-    })
+    page = (params[:page] || 1).to_i
+
+    list_command.call(
+      page: page,
+      success: ->(comics) {
+        render(:index, locals: { comics: comics, page: page })
+      },
+      failure: ->{
+        render template: 'errors/unknown', status: 500
+      }
+    )
+  end
+
+  private
+
+  # This is a sort-of Dependency Injection (since we cannot use the constructor... rails shennanigans)
+  attr_reader :list_command
+  def load_list_comics_command(list_comics = ListComics)
+    @list_command ||= list_comics
   end
 
 end

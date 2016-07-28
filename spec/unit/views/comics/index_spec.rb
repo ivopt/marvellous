@@ -7,7 +7,8 @@ describe "comics/index.html", type: :view do
            locals: {
              comics: [
                build(:comic), build(:comic), build(:comic)
-             ]
+             ],
+             page: 1
            })
     expect(rendered).to have_css('.comic', count: 3)
   end

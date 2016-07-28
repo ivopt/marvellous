@@ -1,4 +1,8 @@
 - comics.each do |comic|
   .comic
     .title= comic.title
-    %img{src: comic.thumbnail_path}
+    .date= comic.date
+    %img.thumbnail{src: comic.thumbnail_path}
+
+= previous_page_link(page)
+= next_page_link(page)
