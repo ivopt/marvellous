@@ -9,6 +9,9 @@ $size-comic-height: 330px;
 $size-comic-width: 220px;
 $size-comic-margin: 10px;
 
+$size-heart-width: 40px;
+$size-heart-height: 37px;
+
 .comics {
   @include clearfix;
 
@@ -20,6 +23,17 @@ $size-comic-margin: 10px;
     float: left;
     width: $size-comic-width;
     height: $size-comic-height;
+
+    &.favourite {
+      .overlay {
+        border-color: $clr-marvel-red;
+
+        .heart {
+          display: block;
+          background-position: 0 0;
+        }
+      }
+    }
 
     .thumbnail img{
       width: $size-comic-width;
@@ -46,6 +60,21 @@ $size-comic-margin: 10px;
           background-color: black;
         }
         .details { display: block; }
+        .heart { display: block; }
+      }
+
+      .heart {
+        position: absolute;
+        top:0;
+        right:0;
+        height: $size-heart-height;
+        width: $size-heart-width;
+        display: none;
+        background: image-url('heart_sprite.png') -$size-heart-width 0;
+
+        &:hover {
+          background-position: -2 * $size-heart-width 0;
+        }
       }
 
       .background {
