@@ -10,7 +10,9 @@ class ApplicationController < ActionController::Base
   end
 
   def search_form_params
-    params.permit(search_form: [:character])[:search_form]
+    params.permit!
+    params.delete(:utf8)
+    params.delete(:search_form)
   end
 
 end

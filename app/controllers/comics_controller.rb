@@ -2,7 +2,7 @@ class ComicsController < ApplicationController
   before_action :load_list_comics_command
 
   def index
-    page = (params[:page] || 1).to_i
+    page = (index_params[:page] || 1).to_i
 
     list_command.call(
       page: page,
@@ -27,6 +27,10 @@ class ComicsController < ApplicationController
   attr_reader :list_command
   def load_list_comics_command(list_comics = ListComics)
     @list_command ||= list_comics
+  end
+
+  def index_params
+    params.permit(:page)
   end
 
 end
