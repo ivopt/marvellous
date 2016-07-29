@@ -10,6 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160729003421) do
+
+  create_table "favourite_comics", force: :cascade do |t|
+    t.integer  "comic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comic_id"], name: "index_favourite_comics_on_comic_id", unique: true
+  end
 
 end
