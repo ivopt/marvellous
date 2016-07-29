@@ -21,6 +21,9 @@ class ListComics
     add_filter_to(opts, search_form)
 
     comics = comics_repository.comics(opts)
+
+    mark_favourites(comics)
+
     success.call(comics)
   rescue
     failure.call
@@ -44,6 +47,13 @@ class ListComics
   def add_pagination_to(opts, page)
     opts[:page] = page
     opts[:per] = PER_PAGE
+  end
+
+  def mark_favourites(comics)
+    ids = comics.map(&:id)
+    favourites = FavouriteComic.favourites(ids)
+    comics.select { |comic| favourites.include? comic.id }
+          .each { |comic| comic.favourite = true }
   end
 
 end

@@ -34,4 +34,13 @@ describe ComicDecorator do
     end
   end
 
+  describe '#issue_number' do
+    let(:comic) { build(:comic, issue_number: 10) }
+    subject { described_class.new(comic) }
+
+    it 'prepends a # sign to the issue number' do
+      expect(subject.issue_number).to eq("##{comic.issue_number}")
+    end
+  end
+
 end

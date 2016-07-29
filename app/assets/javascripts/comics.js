@@ -2,10 +2,20 @@
 // All this logic will automatically be available in application.js.
 
 (function($){
+
+  function toggleFavourite(comicId) {
+    $.ajax({
+      url: '/comics/' + comicId + '/toggle_favourite',
+      type: 'PUT'
+    });
+  }
+
   function attachEvents(comics) {
     $(comics).find('.comic').each(function(o, comic){
       $(comic).find('.heart').on('click', function() {
-        $(comic).toggleClass('favourite')
+        $(comic).toggleClass('favourite');
+        var comicId = $(comic).prop('id').replace("comic_", "");
+        toggleFavourite(comicId);
       });
     });
   }

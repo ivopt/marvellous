@@ -1,6 +1,6 @@
 .comics
   - comics.each do |comic|
-    .comic
+    .comic[comic]{class: comic.favourite ? 'favourite' : ''}
       .thumbnail
         %img{src: comic.thumbnail_path}
       .overlay
@@ -8,7 +8,7 @@
         .heart
         .details
           .title= comic.title
-          %span.number= "##{comic.issue_number}"
+          %span.number= comic.issue_number
           %span.date= comic.date.year
 
 .paginator

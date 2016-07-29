@@ -78,5 +78,15 @@ describe ListComics do
         subject.call(failure: failure)
       end
     end
+
+    context 'regarding favourite comics' do
+      before { create(:favourite_comic, comic_id: comic1.id) }
+
+      it 'it marks favourite comics as being favourite' do
+        expect(comic1).to receive(:favourite=).with(true)
+        expect(comic2).not_to receive(:favourite=).with(true)
+        subject.call
+      end
+    end
   end
 end

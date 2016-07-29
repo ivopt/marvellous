@@ -16,8 +16,9 @@ describe "layouts/application.html.haml", type: :view do
   end
 
   context 'on the header section' do
-    xit 'renders a search by character form' do
+    it 'renders a search by character form' do
       # TODO: add search functionality
+      expect(rendered).to have_css('form input')
     end
   end
 

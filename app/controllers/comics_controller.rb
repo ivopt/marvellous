@@ -17,6 +17,10 @@ class ComicsController < ApplicationController
     )
   end
 
+  def toggle_favourite
+    FavouriteComic.toggle(params[:id])
+  end
+
   private
 
   # This is a sort-of Dependency Injection (since we cannot use the constructor... rails shennanigans)
