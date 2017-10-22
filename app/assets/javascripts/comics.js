@@ -2,7 +2,6 @@
 // All this logic will automatically be available in application.js.
 
 (function($){
-
   function toggleFavourite(comicId) {
     $.ajax({
       url: '/comics/' + comicId + '/toggle_favourite',
@@ -25,6 +24,6 @@
   }
 
   $(document).ready(ready);
-  $(document).on('page:load', ready);
+  $(document).on('turbolinks:load', ready);
 })(jQuery);
 
